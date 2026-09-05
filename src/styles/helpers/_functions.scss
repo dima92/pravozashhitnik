@@ -1,0 +1,44 @@
+@use "sass:math";
+
+// 1. ПЕРЕВОД ПИКСЕЛЕЙ В REM
+@function to-rem($pixels, $context: 16) {
+  @if (math.is-unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+  @if (math.is-unitless($context)) {
+    $context: $context * 1px;
+  }
+  @return math.div($pixels, $context) * 1rem;
+}
+
+// 2. АДАПТИВНЫЙ РАСЧЕТ РАЗМЕРОВ (CLAMP)
+@function fluid($max: 100, $min: 10) {
+  $maxViewportWidth: 1440;
+  $minViewportWidth: 375;
+
+  $max-pure: if(
+    sass(math.is-unitless($max)): $max; else: math.div($max, 1px),
+  );
+  $min-pure: if(
+    sass(math.is-unitless($min)): $min; else: math.div($min, 1px),
+  );
+
+  $maxSize: math.div($max-pure, 16);
+  $minSize: math.div($min-pure, 16);
+  $maxWidth: math.div($maxViewportWidth, 16);
+  $minWidth: math.div($minViewportWidth, 16);
+
+  $slope: math.div(($maxSize - $minSize), ($maxWidth - $minWidth));
+  $yAxisIntersection: -$minWidth * $slope + $minSize;
+
+  $sign: if(
+    sass($yAxisIntersection < 0): "-" ; else: "+",
+  );
+  $absoluteYAxisIntersection: math.abs($yAxisIntersection);
+
+  @return clamp(
+    #{$minSize * 1rem},
+    calc(#{$absoluteYAxisIntersection * 1rem} #{$sign} #{$slope * 100vw}),
+    #{$maxSize * 1rem}
+  );
+}

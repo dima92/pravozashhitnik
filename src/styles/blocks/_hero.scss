@@ -1,0 +1,162 @@
+@use "../helpers" as *;
+@use "../variables" as *;
+
+.promo-block {
+  position: relative;
+  width: 100%;
+  height: to-rem(870);
+  background-color: $bg-color;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+
+  :global(.swiper-wrapper),
+  .swiper-wrapper {
+    height: 100%;
+  }
+
+  .swiper-wrapper {
+    height: 100%;
+  }
+
+  &__slide {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-image: url("/src/assets/images/hero-bg.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    padding-top: to-rem(160);
+    padding-bottom: to-rem(60);
+    @include flex(column, center, center);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(1, 1, 1, 0.55);
+      z-index: 1;
+    }
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 3;
+    @include flex(column, center, center, 24);
+    text-align: center;
+    max-width: to-rem(1090);
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  &__subtitle {
+    font-size: to-rem(30);
+    font-weight: 300;
+    text-transform: uppercase;
+    line-height: 1.5;
+    color: $white-color;
+  }
+
+  &__title {
+    font-weight: 600;
+    color: $accent-color;
+    @include fluid-text(56, 36);
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  &__text {
+    font-size: to-rem(20);
+    font-weight: 400;
+    line-height: 1.2;
+    color: $white-color;
+    text-align: center;
+    margin-bottom: to-rem(48);
+  }
+
+  &__controls {
+    position: absolute;
+    bottom: to-rem(30);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: to-rem(1320);
+    z-index: 10;
+
+    &-inner {
+      @include flex(row, center, center, 32);
+      height: to-rem(40);
+    }
+  }
+
+  &__nav-btn {
+    background: transparent;
+    border: none;
+    color: $white-color;
+    cursor: pointer;
+    padding: to-rem(4);
+    @include flex;
+    transition: $transition-base;
+
+    @include hover {
+      color: $accent-color;
+    }
+  }
+
+  &__pagination {
+    position: static;
+    width: auto;
+
+    .swiper-pagination-bullet {
+      width: to-rem(10);
+      height: to-rem(10);
+      background-color: rgba($white-color, 0.4);
+      opacity: 1;
+      margin-inline: to-rem(6);
+      transition: $transition-base;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+
+    .swiper-pagination-bullet-active {
+      background-color: $accent-color;
+      transform: scale(1.2);
+    }
+  }
+}
+
+.btn {
+  &--primary {
+    @include flex(row, center, center);
+    background-color: $accent-color;
+    color: $white-color;
+    padding: to-rem(16) to-rem(24);
+    font-size: to-rem(14);
+    font-weight: 900;
+    line-height: 1.2;
+    text-transform: uppercase;
+    border: 2px solid $white-color;
+    cursor: pointer;
+    transition: $transition-base;
+
+    @include hover {
+      background-color: $accent-hover;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba($accent-color, 0.6);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}

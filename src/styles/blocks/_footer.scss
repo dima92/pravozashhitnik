@@ -1,0 +1,195 @@
+@use "../helpers" as *;
+@use "../variables" as *;
+
+.footer {
+  background-color: $bg-color;
+  color: $white-color;
+  padding-top: to-rem(60);
+
+  &__top {
+    @include flex(row, space-between, flex-start, 40);
+    margin-bottom: to-rem(32);
+
+    @include respond-to("tablet") {
+      flex-direction: column;
+      gap: to-rem(20);
+    }
+
+    .logo {
+      flex-shrink: 0;
+    }
+
+    &-text {
+      font-size: to-rem(14);
+      line-height: 1.6;
+      color: rgba($white-color, 0.6);
+      max-width: to-rem(640);
+    }
+  }
+
+  &__line {
+    width: 100%;
+    height: 1px;
+    background-color: #8c8c8c;
+    opacity: 0.2;
+    margin-bottom: to-rem(40);
+  }
+
+  &__main {
+    @include flex(row, space-between, flex-start, 40);
+    padding-bottom: to-rem(60);
+
+    @include respond-to("tablet") {
+      flex-direction: column;
+      gap: to-rem(40);
+    }
+  }
+
+  &__col {
+    flex: 1;
+
+    &--contacts {
+      @include flex(column, flex-start, flex-start, 24);
+    }
+
+    &--menu {
+      max-width: to-rem(240);
+    }
+
+    &--expert {
+      max-width: to-rem(380);
+    }
+  }
+
+  &__contact-item {
+    @include flex(row, flex-start, center, 16);
+
+    img {
+      width: to-rem(20);
+      height: to-rem(20);
+      filter: invert(56%) sepia(85%) saturate(1588%) hue-rotate(199deg)
+        brightness(97%) contrast(93%);
+    }
+
+    label,
+    span {
+      display: block;
+      font-size: to-rem(12);
+      color: rgba($white-color, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: to-rem(2);
+    }
+
+    address,
+    a {
+      font-size: to-rem(15);
+      font-style: normal;
+      font-weight: 500;
+      color: $white-color;
+      @include hover {
+        color: $accent-color;
+      }
+    }
+  }
+
+  &__menu-list {
+    @include flex(column, flex-start, flex-start, 14);
+
+    li {
+      width: 100%;
+    }
+  }
+
+  &__menu-link {
+    font-size: to-rem(13);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba($white-color, 0.8);
+    transition: $transition-base;
+
+    @include hover {
+      color: $accent-color;
+      padding-left: to-rem(4);
+    }
+  }
+
+  &__expert-card {
+    @include flex(column, flex-start, stretch, 16);
+  }
+
+  &__expert-header {
+    @include flex(row, flex-start, center, 14);
+  }
+
+  &__expert-avatar {
+    width: to-rem(44);
+    height: to-rem(44);
+    border-radius: 50%;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__expert-meta {
+    line-height: 1.2;
+  }
+
+  &__expert-name {
+    font-size: to-rem(15);
+    font-weight: 700;
+    color: $white-color;
+  }
+
+  &__expert-status {
+    font-size: to-rem(12);
+    color: $accent-color;
+  }
+
+  &__expert-text {
+    font-size: to-rem(13);
+    line-height: 1.5;
+    color: rgba($white-color, 0.6);
+  }
+
+  &__expert-btn {
+    width: 100%;
+    border-color: $white-color;
+    color: $white-color;
+
+    @include hover {
+      background-color: $white-color;
+      color: $bg-color;
+    }
+  }
+
+  &__bottom {
+    background-color: #010101;
+    padding-block: to-rem(16);
+    border-top: 1px solid rgba($white-color, 0.05);
+
+    &-inner {
+      @include flex(row, space-between, center);
+      font-size: to-rem(12);
+      color: rgba($white-color, 0.4);
+
+      @include respond-to("mobile") {
+        flex-direction: column;
+        gap: to-rem(10);
+        text-align: center;
+      }
+    }
+  }
+
+  &__privacy {
+    color: rgba($white-color, 0.4);
+    @include hover {
+      color: $white-color;
+    }
+  }
+}

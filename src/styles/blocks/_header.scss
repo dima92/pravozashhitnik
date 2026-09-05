@@ -1,0 +1,185 @@
+@use "../helpers" as *;
+@use "../variables" as *;
+
+.header {
+  width: 100%;
+  z-index: 10;
+  background-color: transparent;
+
+  &__top {
+    background-color: $dark-variant;
+    border-bottom: 1px solid rgba($white-color, 0.05);
+    padding-block: to-rem(15);
+
+    &-inner {
+      @include flex(row, space-between, center);
+    }
+  }
+
+  &__contacts {
+    @include flex(row, flex-start, center, 24);
+  }
+
+  &__top-link,
+  &__callback {
+    font-size: to-rem(14);
+    font-weight: 600;
+    line-height: 1.2;
+    color: $white-color;
+
+    @include hover {
+      color: $accent-color;
+    }
+  }
+
+  &__top-link {
+    @include flex(row, flex-start, center);
+
+    img {
+      width: to-rem(16);
+      height: to-rem(16);
+      margin-right: to-rem(8);
+      filter: invert(56%) sepia(85%) saturate(1588%) hue-rotate(199deg)
+        brightness(97%) contrast(93%);
+    }
+  }
+
+  &__callback {
+    color: $accent-color;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  &__main {
+    background-color: $dark-transparent;
+    padding-block: to-rem(18);
+
+    &-inner {
+      @include flex(row, space-between, center);
+    }
+  }
+}
+
+.logo {
+  @include flex(column, center, flex-start);
+  line-height: 1.5;
+
+  &__title {
+    font-size: to-rem(28);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: $accent-color;
+  }
+
+  &__subtitle {
+    font-size: to-rem(20);
+    font-weight: 900;
+    text-transform: lowercase;
+    color: $white-color;
+    margin-top: to-rem(4);
+  }
+}
+
+.menu {
+  &__list {
+    @include flex(row, center, center, 32);
+  }
+
+  &__item {
+    &:nth-child(2) {
+      .menu__link {
+        color: $accent-color;
+      }
+    }
+  }
+
+  &__link {
+    font-size: to-rem(18);
+    font-weight: 700;
+    line-height: 1.2;
+    color: $white-color;
+
+    @include hover {
+      color: $accent-color;
+    }
+  }
+}
+
+.burger {
+  display: none;
+  position: relative;
+  width: to-rem(30);
+  height: to-rem(22);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 100;
+
+  @include respond-to("tablet") {
+    @include flex(column, space-between, center);
+  }
+
+  &__line,
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: $white-color;
+    border-radius: 2px;
+    transition: $transition-base;
+    transition-property: transform, opacity, background-color;
+  }
+
+  @include hover {
+    &__line,
+    &::before,
+    &::after {
+      background-color: $accent-color;
+    }
+  }
+
+  &[aria-expanded="true"] {
+    .burger__line {
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+
+    &::before {
+      transform: translateY(to-rem(10)) rotate(45deg);
+    }
+
+    &::after {
+      transform: translateY(to-rem(-10)) rotate(-45deg);
+    }
+  }
+}
+
+@include respond-to("tablet") {
+  .header__menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: to-rem(300);
+    height: 100vh;
+    background-color: $dark-variant;
+    padding: to-rem(100) to-rem(40) to-rem(40);
+    box-shadow: -5px 0 15px rgba($black-pure, 0.5);
+    transition: right 0.4s ease-in-out;
+    z-index: 90;
+
+    &--active {
+      right: 0;
+    }
+  }
+
+  .menu__list {
+    @include flex(column, flex-start, flex-start, 24);
+  }
+
+  .menu__link {
+    font-size: to-rem(18);
+  }
+}
